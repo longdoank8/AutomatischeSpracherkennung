@@ -19,17 +19,48 @@ def train(dataset, model, device, optimizer=None, criterion=None):
     Return: 
         the performance on the training set and the trained model.
     """
-    pass
-                                                            # bring model into training mode
-                                                            # traverse each batch of samples
-                                                            # move data onto gpu, if gpu available
+    # move data onto gpu, if gpu available
+    # zero the parameter gradients
+    # using model compute posterior probabilities
+    # compute loss value
+    # compute accuracy
 
-                                                            # zero the parameter gradients
-                                                            # using model compute posterior probabilities
-                                                            # compute loss value
-                                                            # update model parameters
+        
+    # bring model into training mode
+    model.train()
 
-                                                            # compute accuracy
+    total_loss = 0
+    correct = 0
+    total_samples = 0
+    # traverse each batch of samples
+    for batch_audio, batch_labels, _ in tqdm(dataset, desc="Training Batches"):
+        
+        # move data onto device
+        batch_audio = batch_audio.to(device)
+        batch_labels = batch_labels.to(device)
+
+        # set gradient to 0
+        optimizer.zero_grad()
+
+        # compute Posteriori-probability
+        outputs = model(batch_audio)
+
+        # compute loss
+        loss = criterion(outputs, batch_labels)
+        total_loss += loss.item()
+
+        # Update model parameters
+        loss.backward()
+        optimizer.step()
+
+        predictions = (outputs > 0.5).float()
+
+        correct += (predictions == batch_labels).sum().item()
+        total_samples += batch_labels.size(0)
+
+    accuracy = correct / total_samples
+    print(f"Training Loss: {total_loss / len(dataset)}, Accuracy: {accuracy * 100:.2f}%")
+
     return accuracy, model
 
 def evaluation(dataset, model, device):
@@ -41,13 +72,37 @@ def evaluation(dataset, model, device):
     Return: 
         the accuracy on the given dataset, the predictions saved in dictionary and the model.
     """
-    pass
-                                                            # bring model into evaluation mode
-                                                            # traverse each batch of samples
-                                                            # move data onto gpu if gpu available
+    model.eval()
 
-                                                            # using trained model, compute posterior probabilities
-                                                            # compute accuracy
+    correct = 0
+    total_samples = 0
+    outputdict = {"predictions": [], "labels": [], "probabilities": []}
+
+    with torch.no_grad():  # Keine Gradientenberechnung
+        for batch_audio, batch_labels, _ in tqdm(dataset, desc="Evaluation Batches"):
+
+            # Daten auf das entsprechende Gerät verschieben
+            batch_audio = batch_audio.to(device)
+            batch_labels = batch_labels.to(device)
+
+            # compute Posteriori probabilities
+            outputs = model(batch_audio)
+
+            # compute predictions
+            predictions = (outputs > 0.5).float()
+            
+            correct += (predictions == batch_labels).sum().item()
+            total_samples += batch_labels.size(0)
+            
+            # save data
+            outputdict["predictions"].extend(predictions.cpu().tolist())
+            outputdict["labels"].extend(batch_labels.cpu().tolist())
+            outputdict["probabilities"].extend(outputs.cpu().tolist())
+    
+    # compute accuracy
+    accuracy = correct / total_samples
+    print(f"Evaluation Accuracy: {accuracy * 100:.2f}%")
+
     return accuracy, outputdict, model
 
 def run(config, datadicts=None):
