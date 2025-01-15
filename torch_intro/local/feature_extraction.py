@@ -86,7 +86,7 @@ def compute_features(audio_file, window_size=25e-3, hop_size=10e-3, feature_type
         filterbank = get_mel_filters(sampling_rate, window_size, n_filters, fbank_fmin, fbank_fmax)
         mel_spectrum = apply_mel_filters(absolute_spectrum, filterbank)
         log_mel_spectrum = np.log(np.maximum(mel_spectrum, 1e-10))
-        cep = compute_cepstrum(absolute_spectrum, num_ceps)
+        cep = compute_cepstrum(mel_spectrum, num_ceps)
         
         # MFCCs berechnen
         #mfcc = compute_cepstrum(log_mel_spectrum, num_ceps)
@@ -158,7 +158,7 @@ def apply_mel_filters(abs_spectrum, filterbank):
 
 def compute_cepstrum(mel_spectrum, num_ceps):
     # Numerische Probleme vermeiden
-    mel_spectrum = np.maximum(mel_spectrum, np.finfo(float).eps)
+    mel_spectrum = np.maximum(np.abs(mel_spectrum), np.finfo(float).eps)
     
     # Logarithmus des Mel-Spektrums berechnen
     log_mel_spectrum = np.log(mel_spectrum)

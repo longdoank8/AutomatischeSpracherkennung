@@ -1,0 +1,104 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 1.6
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "words"
+		xmin = 0.0
+		xmax = 1.6
+		intervals: size = 6
+			intervals [1]:
+				xmin = 0.0
+				xmax = 0.150
+				text = ""
+			intervals [2]:
+				xmin = 0.150
+				xmax = 0.450
+				text = "four"
+			intervals [3]:
+				xmin = 0.450
+				xmax = 0.700
+				text = "one"
+			intervals [4]:
+				xmin = 0.700
+				xmax = 0.980
+				text = "four"
+			intervals [5]:
+				xmin = 0.980
+				xmax = 1.440
+				text = "four"
+			intervals [6]:
+				xmin = 1.440
+				xmax = 1.6
+				text = ""
+	item [2]:
+		class = "IntervalTier"
+		name = "phones"
+		xmin = 0.0
+		xmax = 1.6
+		intervals: size = 15
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.150
+				text = "sil"
+			intervals [2]:
+				xmin = 0.150
+				xmax = 0.300
+				text = "F"
+			intervals [3]:
+				xmin = 0.300
+				xmax = 0.370
+				text = "AO1"
+			intervals [4]:
+				xmin = 0.370
+				xmax = 0.450
+				text = "R"
+			intervals [5]:
+				xmin = 0.450
+				xmax = 0.540
+				text = "W"
+			intervals [6]:
+				xmin = 0.540
+				xmax = 0.610
+				text = "AH1"
+			intervals [7]:
+				xmin = 0.610
+				xmax = 0.700
+				text = "N"
+			intervals [8]:
+				xmin = 0.700
+				xmax = 0.810
+				text = "F"
+			intervals [9]:
+				xmin = 0.810
+				xmax = 0.900
+				text = "AO1"
+			intervals [10]:
+				xmin = 0.900
+				xmax = 0.980
+				text = "R"
+			intervals [11]:
+				xmin = 0.980
+				xmax = 1.080
+				text = "F"
+			intervals [12]:
+				xmin = 1.080
+				xmax = 1.250
+				text = "AO1"
+			intervals [13]:
+				xmin = 1.250
+				xmax = 1.440
+				text = "R"
+			intervals [14]:
+				xmin = 1.440
+				xmax = 1.580
+				text = "sp"
+			intervals [15]:
+				xmin = 1.580
+				xmax = 1.6
+				text = ""

@@ -1,0 +1,104 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 1.6511875
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "words"
+		xmin = 0.0
+		xmax = 1.6511875
+		intervals: size = 6
+			intervals [1]:
+				xmin = 0.0
+				xmax = 0.170
+				text = ""
+			intervals [2]:
+				xmin = 0.170
+				xmax = 0.440
+				text = "eight"
+			intervals [3]:
+				xmin = 0.440
+				xmax = 0.680
+				text = "one"
+			intervals [4]:
+				xmin = 0.680
+				xmax = 0.960
+				text = "eight"
+			intervals [5]:
+				xmin = 0.960
+				xmax = 1.460
+				text = "seven"
+			intervals [6]:
+				xmin = 1.460
+				xmax = 1.6511875
+				text = ""
+	item [2]:
+		class = "IntervalTier"
+		name = "phones"
+		xmin = 0.0
+		xmax = 1.6511875
+		intervals: size = 15
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.170
+				text = "sil"
+			intervals [2]:
+				xmin = 0.170
+				xmax = 0.390
+				text = "EY1"
+			intervals [3]:
+				xmin = 0.390
+				xmax = 0.440
+				text = "T"
+			intervals [4]:
+				xmin = 0.440
+				xmax = 0.570
+				text = "W"
+			intervals [5]:
+				xmin = 0.570
+				xmax = 0.620
+				text = "AH1"
+			intervals [6]:
+				xmin = 0.620
+				xmax = 0.680
+				text = "N"
+			intervals [7]:
+				xmin = 0.680
+				xmax = 0.840
+				text = "EY1"
+			intervals [8]:
+				xmin = 0.840
+				xmax = 0.960
+				text = "T"
+			intervals [9]:
+				xmin = 0.960
+				xmax = 1.090
+				text = "S"
+			intervals [10]:
+				xmin = 1.090
+				xmax = 1.210
+				text = "EH1"
+			intervals [11]:
+				xmin = 1.210
+				xmax = 1.280
+				text = "V"
+			intervals [12]:
+				xmin = 1.280
+				xmax = 1.350
+				text = "AH0"
+			intervals [13]:
+				xmin = 1.350
+				xmax = 1.460
+				text = "N"
+			intervals [14]:
+				xmin = 1.460
+				xmax = 1.630
+				text = "sp"
+			intervals [15]:
+				xmin = 1.630
+				xmax = 1.6511875
+				text = ""

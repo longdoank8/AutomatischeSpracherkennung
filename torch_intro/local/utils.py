@@ -8,7 +8,8 @@ from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 import torch_intro.local.feature_extraction as fe
 
-def get_metadata(datadir, sourcedatadir):
+
+def get_metadata(datadir):
     """
     get_metadata() load the meta data in dictionary. 
     Input:
@@ -18,22 +19,15 @@ def get_metadata(datadir, sourcedatadir):
     """
 
     # Dateien laden 
-    train_file = os.path.join(datadir, "train.json")
-    dev_file = os.path.join(datadir, "dev.json")
-    test_file = os.path.join(datadir, "test.json")
+    f = open(os.path.join(datadir, "train.json"))
+    traindict = json.load(f)
 
-    # read "train.json as traindict"
-    with open(train_file, "r") as f:
-        traindict = json.load(f)
-     
-    # read "dev.json as devdict"
-    with open(dev_file, "r") as f:
-        devdict = json.load(f)
-    
-    # read "test.json as testdict"
-    with open(test_file, "r") as f:
-        testdict = json.load(f)
-                                            
+    f = open(os.path.join(datadir, "dev.json"))
+    devdict = json.load(f)
+
+    f = open(os.path.join(datadir, "test.json"))
+    testdict = json.load(f)
+
     return traindict, devdict, testdict
 
 def padding(sequences):
@@ -49,22 +43,20 @@ def padding(sequences):
         label_sequence <torch.FloatTensor>: Labels als Tensor.
         filename_sequence <list>: Dateinamen als Liste.
     '''
-    # Listen zum Speichern der Audio-Features, Labels und Dateinamen
+
     audio_feat_sequence = []
     label_sequence = []
     filename_sequence = []
 
     for seq in sequences:
-        # Extrahiere die Audio-Features, Labels und Dateinamen
-        audio_feat_sequence.append(seq[0])  # Audio-Features
-        label_sequence.append(seq[1])      # Labels
-        filename_sequence.append(seq[2])   # Dateinamen
+  
+        audio_feat_sequence.append(seq[0])  
+        label_sequence.append(seq[1])      
+        filename_sequence.append(seq[2])   
 
-    # Zero-Padding der Audio-Features
-    # pad_sequence erwartet eine Liste von Tensors, nicht von Listen oder zusätzlichen Dimensionen
+    # Zero-Padding of Audio-Features
     audio_feat_sequence = pad_sequence(audio_feat_sequence, batch_first=True)
 
-    # Labels in einen Tensor umwandeln
     label_sequence = torch.stack(label_sequence)
 
     return audio_feat_sequence, label_sequence, filename_sequence
@@ -81,6 +73,7 @@ class Dataloader(Dataset):  # For instantiating train, validation and test datas
         self.fbank_fmin = feat_params[4]
         self.fbank_fmax = feat_params[5]
         self.max_len = feat_params[6]
+
 
     def _get_keys(self, datadict):
         keys = list(datadict.keys())
@@ -107,18 +100,11 @@ class Dataloader(Dataset):  # For instantiating train, validation and test datas
         hop_size=self.hop_size, 
         n_filters=self.n_filters, 
         fbank_fmin=self.fbank_fmin, 
-        fbank_fmax=self.fbank_fmax, 
-        #num_ceps=self.num_ceps, 
-        #left_context=self.left_context, 
-        #right_context=self.right_context
+        fbank_fmax=self.fbank_fmax
         )
 
         # transform numpy audio features to FloatTensor 
-        audiofeat = torch.tensor(audiofeat, dtype=torch.float32) 
-
-        # Crop the audio features, if the frame length longer than defined max_len                                           
-        if audiofeat.shape[0] > self.max_len:    
-            audiofeat = audiofeat[:self.max_len]
+        audiofeat = torch.FloatTensor(audiofeat) 
 
         # Move label to FloatTensor
         label = torch.FloatTensor([label_file_path])

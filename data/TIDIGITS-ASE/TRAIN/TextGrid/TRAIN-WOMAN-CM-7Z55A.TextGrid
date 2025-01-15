@@ -1,0 +1,116 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 2.3168125
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "words"
+		xmin = 0.0
+		xmax = 2.3168125
+		intervals: size = 6
+			intervals [1]:
+				xmin = 0.0
+				xmax = 0.240
+				text = ""
+			intervals [2]:
+				xmin = 0.240
+				xmax = 0.680
+				text = "seven"
+			intervals [3]:
+				xmin = 0.680
+				xmax = 0.980
+				text = "zero"
+			intervals [4]:
+				xmin = 0.980
+				xmax = 1.280
+				text = "five"
+			intervals [5]:
+				xmin = 1.280
+				xmax = 1.810
+				text = "five"
+			intervals [6]:
+				xmin = 1.810
+				xmax = 2.3168125
+				text = ""
+	item [2]:
+		class = "IntervalTier"
+		name = "phones"
+		xmin = 0.0
+		xmax = 2.3168125
+		intervals: size = 18
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.240
+				text = "sil"
+			intervals [2]:
+				xmin = 0.240
+				xmax = 0.410
+				text = "S"
+			intervals [3]:
+				xmin = 0.410
+				xmax = 0.490
+				text = "EH1"
+			intervals [4]:
+				xmin = 0.490
+				xmax = 0.550
+				text = "V"
+			intervals [5]:
+				xmin = 0.550
+				xmax = 0.600
+				text = "AH0"
+			intervals [6]:
+				xmin = 0.600
+				xmax = 0.680
+				text = "N"
+			intervals [7]:
+				xmin = 0.680
+				xmax = 0.740
+				text = "Z"
+			intervals [8]:
+				xmin = 0.740
+				xmax = 0.810
+				text = "IY1"
+			intervals [9]:
+				xmin = 0.810
+				xmax = 0.900
+				text = "R"
+			intervals [10]:
+				xmin = 0.900
+				xmax = 0.980
+				text = "OW0"
+			intervals [11]:
+				xmin = 0.980
+				xmax = 1.090
+				text = "F"
+			intervals [12]:
+				xmin = 1.090
+				xmax = 1.230
+				text = "AY1"
+			intervals [13]:
+				xmin = 1.230
+				xmax = 1.280
+				text = "V"
+			intervals [14]:
+				xmin = 1.280
+				xmax = 1.400
+				text = "F"
+			intervals [15]:
+				xmin = 1.400
+				xmax = 1.610
+				text = "AY1"
+			intervals [16]:
+				xmin = 1.610
+				xmax = 1.810
+				text = "V"
+			intervals [17]:
+				xmin = 1.810
+				xmax = 2.300
+				text = "sp"
+			intervals [18]:
+				xmin = 2.300
+				xmax = 2.3168125
+				text = ""

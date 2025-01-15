@@ -1,0 +1,120 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 1.7791875
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "words"
+		xmin = 0.0
+		xmax = 1.7791875
+		intervals: size = 7
+			intervals [1]:
+				xmin = 0.0
+				xmax = 0.180
+				text = ""
+			intervals [2]:
+				xmin = 0.180
+				xmax = 0.410
+				text = "eight"
+			intervals [3]:
+				xmin = 0.410
+				xmax = 0.670
+				text = "six"
+			intervals [4]:
+				xmin = 0.670
+				xmax = 0.920
+				text = "three"
+			intervals [5]:
+				xmin = 0.920
+				xmax = 1.200
+				text = "four"
+			intervals [6]:
+				xmin = 1.200
+				xmax = 1.560
+				text = "nine"
+			intervals [7]:
+				xmin = 1.560
+				xmax = 1.7791875
+				text = ""
+	item [2]:
+		class = "IntervalTier"
+		name = "phones"
+		xmin = 0.0
+		xmax = 1.7791875
+		intervals: size = 18
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.180
+				text = "sil"
+			intervals [2]:
+				xmin = 0.180
+				xmax = 0.350
+				text = "EY1"
+			intervals [3]:
+				xmin = 0.350
+				xmax = 0.410
+				text = "T"
+			intervals [4]:
+				xmin = 0.410
+				xmax = 0.500
+				text = "S"
+			intervals [5]:
+				xmin = 0.500
+				xmax = 0.550
+				text = "IH1"
+			intervals [6]:
+				xmin = 0.550
+				xmax = 0.630
+				text = "K"
+			intervals [7]:
+				xmin = 0.630
+				xmax = 0.670
+				text = "S"
+			intervals [8]:
+				xmin = 0.670
+				xmax = 0.760
+				text = "TH"
+			intervals [9]:
+				xmin = 0.760
+				xmax = 0.830
+				text = "R"
+			intervals [10]:
+				xmin = 0.830
+				xmax = 0.920
+				text = "IY1"
+			intervals [11]:
+				xmin = 0.920
+				xmax = 1.040
+				text = "F"
+			intervals [12]:
+				xmin = 1.040
+				xmax = 1.130
+				text = "AO1"
+			intervals [13]:
+				xmin = 1.130
+				xmax = 1.200
+				text = "R"
+			intervals [14]:
+				xmin = 1.200
+				xmax = 1.290
+				text = "N"
+			intervals [15]:
+				xmin = 1.290
+				xmax = 1.480
+				text = "AY1"
+			intervals [16]:
+				xmin = 1.480
+				xmax = 1.560
+				text = "N"
+			intervals [17]:
+				xmin = 1.560
+				xmax = 1.760
+				text = "sp"
+			intervals [18]:
+				xmin = 1.760
+				xmax = 1.7791875
+				text = ""

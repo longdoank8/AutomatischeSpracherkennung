@@ -1,0 +1,116 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 2.0608125
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "words"
+		xmin = 0.0
+		xmax = 2.0608125
+		intervals: size = 7
+			intervals [1]:
+				xmin = 0.0
+				xmax = 0.160
+				text = ""
+			intervals [2]:
+				xmin = 0.160
+				xmax = 0.490
+				text = "nine"
+			intervals [3]:
+				xmin = 0.490
+				xmax = 0.780
+				text = "nine"
+			intervals [4]:
+				xmin = 0.780
+				xmax = 1.060
+				text = "eight"
+			intervals [5]:
+				xmin = 1.060
+				xmax = 1.380
+				text = "zero"
+			intervals [6]:
+				xmin = 1.380
+				xmax = 1.810
+				text = "two"
+			intervals [7]:
+				xmin = 1.810
+				xmax = 2.0608125
+				text = ""
+	item [2]:
+		class = "IntervalTier"
+		name = "phones"
+		xmin = 0.0
+		xmax = 2.0608125
+		intervals: size = 17
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.160
+				text = "sil"
+			intervals [2]:
+				xmin = 0.160
+				xmax = 0.310
+				text = "N"
+			intervals [3]:
+				xmin = 0.310
+				xmax = 0.440
+				text = "AY1"
+			intervals [4]:
+				xmin = 0.440
+				xmax = 0.490
+				text = "N"
+			intervals [5]:
+				xmin = 0.490
+				xmax = 0.570
+				text = "N"
+			intervals [6]:
+				xmin = 0.570
+				xmax = 0.710
+				text = "AY1"
+			intervals [7]:
+				xmin = 0.710
+				xmax = 0.780
+				text = "N"
+			intervals [8]:
+				xmin = 0.780
+				xmax = 0.930
+				text = "EY1"
+			intervals [9]:
+				xmin = 0.930
+				xmax = 1.060
+				text = "T"
+			intervals [10]:
+				xmin = 1.060
+				xmax = 1.130
+				text = "Z"
+			intervals [11]:
+				xmin = 1.130
+				xmax = 1.210
+				text = "IH1"
+			intervals [12]:
+				xmin = 1.210
+				xmax = 1.300
+				text = "R"
+			intervals [13]:
+				xmin = 1.300
+				xmax = 1.380
+				text = "OW0"
+			intervals [14]:
+				xmin = 1.380
+				xmax = 1.520
+				text = "T"
+			intervals [15]:
+				xmin = 1.520
+				xmax = 1.810
+				text = "UW1"
+			intervals [16]:
+				xmin = 1.810
+				xmax = 2.040
+				text = "sp"
+			intervals [17]:
+				xmin = 2.040
+				xmax = 2.0608125
+				text = ""

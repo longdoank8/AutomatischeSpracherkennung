@@ -1,0 +1,128 @@
+File type = "ooTextFile"
+Object class = "TextGrid"
+
+xmin = 0.0
+xmax = 2.0991875
+tiers? <exists>
+size = 2
+item []:
+	item [1]:
+		class = "IntervalTier"
+		name = "words"
+		xmin = 0.0
+		xmax = 2.0991875
+		intervals: size = 6
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.460
+				text = "one"
+			intervals [2]:
+				xmin = 0.460
+				xmax = 0.770
+				text = "six"
+			intervals [3]:
+				xmin = 0.770
+				xmax = 1.150
+				text = "seven"
+			intervals [4]:
+				xmin = 1.150
+				xmax = 1.460
+				text = "five"
+			intervals [5]:
+				xmin = 1.460
+				xmax = 1.880
+				text = "five"
+			intervals [6]:
+				xmin = 1.880
+				xmax = 2.0991875
+				text = ""
+	item [2]:
+		class = "IntervalTier"
+		name = "phones"
+		xmin = 0.0
+		xmax = 2.0991875
+		intervals: size = 21
+			intervals [1]:
+				xmin = 0.000
+				xmax = 0.210
+				text = "HH"
+			intervals [2]:
+				xmin = 0.210
+				xmax = 0.290
+				text = "W"
+			intervals [3]:
+				xmin = 0.290
+				xmax = 0.370
+				text = "AH1"
+			intervals [4]:
+				xmin = 0.370
+				xmax = 0.460
+				text = "N"
+			intervals [5]:
+				xmin = 0.460
+				xmax = 0.600
+				text = "S"
+			intervals [6]:
+				xmin = 0.600
+				xmax = 0.660
+				text = "IH1"
+			intervals [7]:
+				xmin = 0.660
+				xmax = 0.740
+				text = "K"
+			intervals [8]:
+				xmin = 0.740
+				xmax = 0.770
+				text = "S"
+			intervals [9]:
+				xmin = 0.770
+				xmax = 0.880
+				text = "S"
+			intervals [10]:
+				xmin = 0.880
+				xmax = 0.950
+				text = "EH1"
+			intervals [11]:
+				xmin = 0.950
+				xmax = 1.000
+				text = "V"
+			intervals [12]:
+				xmin = 1.000
+				xmax = 1.060
+				text = "AH0"
+			intervals [13]:
+				xmin = 1.060
+				xmax = 1.150
+				text = "N"
+			intervals [14]:
+				xmin = 1.150
+				xmax = 1.280
+				text = "F"
+			intervals [15]:
+				xmin = 1.280
+				xmax = 1.400
+				text = "AY1"
+			intervals [16]:
+				xmin = 1.400
+				xmax = 1.460
+				text = "V"
+			intervals [17]:
+				xmin = 1.460
+				xmax = 1.600
+				text = "F"
+			intervals [18]:
+				xmin = 1.600
+				xmax = 1.830
+				text = "AY1"
+			intervals [19]:
+				xmin = 1.830
+				xmax = 1.880
+				text = "V"
+			intervals [20]:
+				xmin = 1.880
+				xmax = 2.080
+				text = "sp"
+			intervals [21]:
+				xmin = 2.080
+				xmax = 2.0991875
+				text = ""

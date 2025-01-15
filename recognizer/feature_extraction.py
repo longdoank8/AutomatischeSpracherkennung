@@ -55,6 +55,7 @@ def compute_absolute_spectrum(frames):
 
     return abs_spectrum
 
+
 def compute_features(audio_file, window_size=25e-3, hop_size=10e-3, feature_type='FBANK', fbank_fmax=8000, num_ceps=13 , n_filters=24, fbank_fmin=0):
     # Audiodatei einlesen
     sampling_rate, audio_data = wavfile.read(audio_file)
@@ -86,7 +87,7 @@ def compute_features(audio_file, window_size=25e-3, hop_size=10e-3, feature_type
         filterbank = get_mel_filters(sampling_rate, window_size, n_filters, fbank_fmin, fbank_fmax)
         mel_spectrum = apply_mel_filters(absolute_spectrum, filterbank)
         log_mel_spectrum = np.log(np.maximum(mel_spectrum, 1e-10))
-        cep = compute_cepstrum(absolute_spectrum, num_ceps)
+        cep = compute_cepstrum(mel_spectrum, num_ceps)
         
         # MFCCs berechnen
         #mfcc = compute_cepstrum(log_mel_spectrum, num_ceps)
@@ -101,7 +102,59 @@ def compute_features(audio_file, window_size=25e-3, hop_size=10e-3, feature_type
             delta_delta = get_delta(delta)
             return append_delta(append_delta(cep, delta), delta_delta)
 
-    return absolute_spectrum
+    return absolute_spectrum    
+
+def compute_features_with_context(audio_file, window_size=25e-3, hop_size=10e-3, feature_type='STFT', fbank_fmax=8000, num_ceps=13 , n_filters=24, fbank_fmin=0, left_context=4, right_context=4):
+    # Audiodatei einlesen
+    sampling_rate, audio_data = wavfile.read(audio_file)
+    
+    # Normalisieren der Audiodaten auf den Bereich -1 bis 1
+    audio_data = audio_data / np.max(np.abs(audio_data))
+    
+    # Frames erstellen mit der Funktion make_frames
+    frames = make_frames(audio_data, sampling_rate, window_size, hop_size)
+    
+    # Berechnung des Betragsspektrums mit der Funktion compute_absolute_spectrum
+    absolute_spectrum = compute_absolute_spectrum(frames)
+    absolute_spectrum_expanded = add_context(absolute_spectrum, left_context, right_context)
+
+     # Feature-Berechnung basierend auf feature_type
+    if feature_type == 'FBANK':
+        # Mel-Filterbank berechnen
+        filterbank = get_mel_filters(sampling_rate, window_size, n_filters, fbank_fmin, fbank_fmax)
+
+        # Mel-Filterbank anwenden
+        mel_spectrum = apply_mel_filters(absolute_spectrum, filterbank)
+        epsi = np.full(mel_spectrum.shape, np.nextafter(0, 1))
+        mel_spectrum = np.where(mel_spectrum == 0, epsi, mel_spectrum)
+        log_mel_spectrum=np.log(mel_spectrum)
+        log_mel_spectrum_expanded = add_context(log_mel_spectrum, left_context, right_context)
+        return log_mel_spectrum_expanded
+
+    
+    # Log-Mel-Spektrum berechnen
+    if feature_type.startswith('MFCC'):
+        filterbank = get_mel_filters(sampling_rate, window_size, n_filters, fbank_fmin, fbank_fmax)
+        mel_spectrum = apply_mel_filters(absolute_spectrum, filterbank)
+        log_mel_spectrum = np.log(np.maximum(mel_spectrum, 1e-10))
+        cep = compute_cepstrum(mel_spectrum, num_ceps) # korrigiert
+        cep_expanded = add_context(cep, left_context, right_context)
+        
+        if feature_type == 'MFCC':
+            return cep_expanded
+        elif feature_type == 'MFCC_D':
+            delta = get_delta(cep)
+            merged = append_delta(cep,delta)
+            merged_expanded = add_context(merged, left_context, right_context)
+            return merged_expanded
+        elif feature_type == 'MFCC_D_DD':
+            delta = get_delta(cep)
+            delta_delta = get_delta(delta)
+            merged_2 = append_delta(append_delta(cep, delta), delta_delta)
+            merged_2_expanded = add_context(merged_2, left_context, right_context)
+            return merged_2_expanded
+
+    return absolute_spectrum_expanded
 
 
 def get_mel_filters(sampling_rate, window_size_sec, n_filters, f_min=0, f_max=8000):
@@ -158,7 +211,8 @@ def apply_mel_filters(abs_spectrum, filterbank):
 
 def compute_cepstrum(mel_spectrum, num_ceps):
     # Numerische Probleme vermeiden
-    mel_spectrum = np.maximum(mel_spectrum, np.finfo(float).eps)
+    # korrigiert
+    mel_spectrum = np.maximum(np.abs(mel_spectrum), np.finfo(float).eps)
     
     # Logarithmus des Mel-Spektrums berechnen
     log_mel_spectrum = np.log(mel_spectrum)
@@ -184,3 +238,38 @@ def get_delta(x):
 def append_delta(x, delta):
     # konkateniert Merkmalsvektor mit erster zeitlich Ableitung
     return np.hstack((x, delta))
+
+
+def add_context(feats, left_context=6, right_context=6):
+    c_dim= left_context+right_context+1
+    feats_expanded=np.expand_dims(feats, axis=2)
+    
+    feats_expanded = np.tile(feats_expanded, c_dim)
+
+    for i in range(feats_expanded.shape[0]):
+        if i<left_context:
+            diff=left_context-i
+
+            counter=1
+            first_col=feats[0,:]
+            appended_first_col = first_col
+            appended_first_col=np.expand_dims(appended_first_col,axis=0)
+            while counter<diff:
+                appended_first_col=np.vstack((appended_first_col,first_col))
+                counter+=1
+
+            feats_expanded[i,:,:]=np.hstack((np.transpose(appended_first_col),np.transpose(feats[0:i+right_context+1,:])))
+        elif i>=feats_expanded.shape[0]-right_context:
+            diff=i-feats_expanded.shape[0]+right_context+1
+            counter=1
+            last_col=feats[feats.shape[0]-1,:]
+            appended_last_col = last_col
+            appended_last_col=np.expand_dims(appended_last_col,axis=0)
+            while counter<diff:
+                appended_last_col=np.vstack((appended_last_col,last_col))
+                counter+=1
+            feats_expanded[i,:,:]=np.hstack((np.transpose(feats[i-left_context:,:]),np.transpose(appended_last_col)))
+        else: 
+            feats_expanded[i,:,:]=np.transpose(feats[i-left_context:i+right_context+1,:])
+
+    return feats_expanded

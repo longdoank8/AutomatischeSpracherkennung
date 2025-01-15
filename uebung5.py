@@ -42,7 +42,7 @@ if __name__ == '__main__':
             os.makedirs(makedir)
 
     # Load meta data as dictionary
-    traindict, devdict, testdict = get_metadata(args.datasdir, sourcedatadir)
+    traindict, devdict, testdict = get_metadata(args.datasdir)
     # Config audio paths
     for dict in [traindict, devdict, testdict]:
         for k, v in dict.items():
