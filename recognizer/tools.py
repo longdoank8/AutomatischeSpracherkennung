@@ -5,12 +5,12 @@ from praatio import tgio
 def sec_to_samples(x, sampling_rate):
 
     return int(x * sampling_rate)
-    pass
+    
 
 def next_pow2(x):
 
     return math.ceil(math.log2(abs(x)))
-    pass
+    
 
 # next pow2 rundet immer auf die naechst hoehere potenz
 # bsp: fuer 300 => 2^8 ist 256
@@ -156,3 +156,47 @@ def praat_to_interval(praat_file):
 
     # we will read in word-based
     return itervals, min_time, max_time
+
+def viterbi( logLike, logPi, logA ):
+    
+  logLike = np.array(logLike)  
+  logPi = np.array(logPi) 
+  logA = np.array(logA) 
+
+  phi_t = []
+  psi_t = [[-1] * logA.shape[0]]
+
+  phi_t.append([logPi + logLike[0, :]])
+
+  for t in range(1, logLike.shape[0]):
+    phi_j = []
+    psi_j = []
+    for j in range(logLike.shape[1]):
+      phi_j.append(np.max(phi_t[t-1] + logA[:, j]) + logLike[t, j])
+      psi_j.append(np.argmax(phi_t[t-1] + logA[:, j]))
+    phi_t.append(phi_j)
+    psi_t.append(psi_j)
+
+  pstar = np.max(phi_t[-1])
+  
+  tmp_state = np.argmax(phi_t[-1])
+  stateSequence = [tmp_state]
+  t = logLike.shape[0] - 1
+  while(t != 0):
+    tmp_state = psi_t[t][tmp_state]
+    stateSequence.insert(0, tmp_state)
+    t-= 1
+
+  return stateSequence, pstar
+
+
+def limLog(x):
+    """
+    Log of x.
+
+    :param x: numpy array.
+    :return: log of x.
+    """
+    epsi = np.full(x.shape, np.nextafter(0, 1))
+    x = np.where(x <= 0, epsi, x)
+    return np.log(x) 

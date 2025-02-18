@@ -21,7 +21,7 @@ Zudem wird jede Woche die zu bearbeiteten Übungsaufgaben auf diesem Repository 
 | Übung 8                         | ...                  | ...                     | ...             |
 | Übung 9                         | ...                  | ...                     | ...             |
 | Übung 10                        | ...                  | ...                     | ...             |
-| Übung 11                        | ...                  | ...                     | ...             |
+| Übung 11                        | ...                  | 19.02.2025              | ...             |
 
 ## Hybride Spracherkennung
 
