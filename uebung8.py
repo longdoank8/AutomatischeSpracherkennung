@@ -3,8 +3,36 @@ import numpy as np
 
 # Bitte diese Funktion selber implementieren
 def viterbi( logLike, logPi, logA ):
-    ...
-    return stateSequence, pStar
+    
+  logLike = np.array(logLike)  
+  logPi = np.array(logPi) 
+  logA = np.array(logA) 
+
+  phi_t = []
+  psi_t = [[-1] * logA.shape[0]]
+
+  phi_t.append([logPi + logLike[0, :]])
+
+  for t in range(1, logLike.shape[0]):
+    phi_j = []
+    psi_j = []
+    for j in range(logLike.shape[1]):
+      phi_j.append(np.max(phi_t[t-1] + logA[:, j]) + logLike[t, j])
+      psi_j.append(np.argmax(phi_t[t-1] + logA[:, j]))
+    phi_t.append(phi_j)
+    psi_t.append(psi_j)
+
+  pstar = np.max(phi_t[-1])
+  
+  tmp_state = np.argmax(phi_t[-1])
+  stateSequence = [tmp_state]
+  t = logLike.shape[0] - 1
+  while(t != 0):
+    tmp_state = psi_t[t][tmp_state]
+    stateSequence.insert(0, tmp_state)
+    t-= 1
+
+  return stateSequence, pstar
 
 
 def limLog(x):
