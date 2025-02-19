@@ -104,7 +104,7 @@ def compute_features(audio_file, window_size=25e-3, hop_size=10e-3, feature_type
 
     return absolute_spectrum    
 
-def compute_features_with_context(audio_file, window_size=25e-3, hop_size=10e-3, feature_type='STFT', fbank_fmax=8000, num_ceps=13 , n_filters=24, fbank_fmin=0, left_context=4, right_context=4):
+def compute_features_with_context(audio_file, window_size=25e-3, hop_size=10e-3, feature_type='STFT', n_filters=24, fbank_fmin=0, fbank_fmax=8000, num_ceps=13, left_context=4, right_context=4):
     # Audiodatei einlesen
     sampling_rate, audio_data = wavfile.read(audio_file)
     

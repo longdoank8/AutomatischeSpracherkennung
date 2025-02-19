@@ -95,7 +95,7 @@ class Dataloader(Dataset):  # For instantiating train, validation and test datas
         filename = self.datakeys[index]
         audio_file_path = self.datadict[filename]["audiodir"]
         label_file_path = self.datadict[filename]["targetdir"]
-        #word_file_path = self.datadict[filename]["audiodir"].replace("wav", "lab")
+        word_file_path = self.datadict[filename]["audiodir"].replace("wav", "lab")
         
         # Extract audio features 
         audiofeat = fe.compute_features_with_context(audio_file_path, 
@@ -122,6 +122,7 @@ class Dataloader(Dataset):  # For instantiating train, validation and test datas
         hop_size_samples = tools.sec_to_samples(self.hop_size, sampling_rate)
         
         label = torch.FloatTensor(tools.praat_file_to_target(label_file_path, sampling_rate=sampling_rate, window_size_samples = window_size_samples, hop_size_samples = hop_size_samples, hmm = self.hmm))
-        #words = [word.lower() for word in open(word_file_path).read().split()]
+        words = [word.lower() for word in open(word_file_path).read().split()]
 
         return audiofeat, label, filename
+        #return audiofeat, label, filename, words    ################################### fuer spaeter aendern !!!!!!!

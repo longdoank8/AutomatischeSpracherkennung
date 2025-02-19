@@ -15,7 +15,7 @@ class HMM:
     logA= {}
     logPi={}
 
-    def __init__(self, mode='default', words=WORDS):
+    def __init__(self, mode='adjust', words=WORDS):
         """
         Constructor of HMM class. Inits with provided structure words
         :param input: word of the defined HMM.
@@ -168,7 +168,7 @@ class HMM:
         return words
 
     
-    def postseriors_to_transcription(self,posteriors):
+    def posteriors_to_transcription(self,posteriors):
 
         StateSequence, Pstar = viterbi(limLog(posteriors), self.logPi, self.logA)
         return self.getTranscription(StateSequence)

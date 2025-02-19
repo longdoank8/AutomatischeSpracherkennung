@@ -104,7 +104,8 @@ def evaluation(dataset, model, odim, device, epoch):
     device_ = torch.device("cuda:0" if device == "gpu" else "cpu")
     accuracy = []
     for batch in tqdm(dataset, desc="Evaluation epoch " + str(epoch)):
-        inputs, labels, _ = batch
+        inputs, labels, _  = batch
+        # inputs, labels, _ , _ = batch ################################### fuer spaeter aendern !!!!!!!
 
         inputs = inputs.to(device_)
         labels = labels.to(device_)
@@ -153,10 +154,12 @@ def run(config, args, datadicts=None):
     idim = config["num_ceps"] * 3 * (config["right_context"] + config["left_context"] + 1)  
 
 
-    # Define loss function, model and optimizer
-    criterion = torch.nn.CrossEntropyLoss()                                                  # Binary cross entropy as loss function.
-    model = DNN_L_Model(idim=idim, odim=train_dataset.hmm.get_num_states(), hidden_dim=512)        # Initial model       # Initial model
-    model = model.to(config["device"])  # move model to gpu, if gpu available
+    if(args.model_l):
+        model = DNN_L_Model(idim=idim, odim=train_dataset.hmm.get_num_states(), hidden_dim=args.hidden_dim)        # Initial model
+    else:
+        model = DNN_Model(idim=idim, odim=train_dataset.hmm.get_num_states(), hidden_dim=args.hidden_dim)        # Initial model
+
+    model = model.to("cuda:0" if config["device"] == "gpu" else "cpu")  
                                                 
     optimizer = torch.optim.Adam(model.parameters(),                                # Initialize an optimizer
                                  lr=config["lr"]
@@ -191,7 +194,7 @@ def run(config, args, datadicts=None):
         # Evaluate trained model on dev set
         print("Train epoch ", str(epoch), " accuracy: ", trainscore)
         
-        # print("evalscore: ", evalscore)
+        #print("evalscore: ", evalscore)
         evalscore, model = evaluation(data_loader_dev, model, odim,
                                      config["device"], epoch)
         print("Evaluation epoch ", str(epoch), " accuracy: ", evalscore)
@@ -203,33 +206,34 @@ def run(config, args, datadicts=None):
 
     model.load_state_dict(torch.load(os.path.join(model_output_path, "best_model.pth")))
     # label_file_path = os.path.join(args.sourcedatadir, "TEST/TextGrid/TEST-WOMAN-BF-7O17O49A.TextGrid")
-    audiofeat, label, filename = test_dataset[0]
+    audiofeat, label, filename= test_dataset[0]
+    # audiofeat, label, filename, words = test_dataset[0] ##################### fuer spaeter
     audio_file = os.path.join(args.sourcedatadir, "TEST/wav", filename + ".wav")
     output = wav_to_posteriors(model, audio_file, feat_params, config["device"])
 
 
-    # Create subplots
-    fig, axs = plt.subplots(2, 1, figsize=(8, 6))
+    # # Create subplots
+    # fig, axs = plt.subplots(2, 1, figsize=(8, 6))
 
-    # Plot Ground-Truth Labels
-    im = axs[0].imshow(label.T, origin="lower")
-    axs[0].set_xlabel("Frames")
-    axs[0].set_ylabel("HMM states")
-    axs[0].set_title("GT Labels")
+    # # Plot Ground-Truth Labels
+    # im = axs[0].imshow(label.T, origin="lower")
+    # axs[0].set_xlabel("Frames")
+    # axs[0].set_ylabel("HMM states")
+    # axs[0].set_title("GT Labels")
 
-    # Plot A-posteriori Wahrscheinlichkeiten
-    axs[1].imshow(output.T, origin="lower")
-    axs[1].set_xlabel("Frames")
-    axs[1].set_ylabel("HMM states")
-    axs[1].set_title("A-post. Wahrscheinlichkeiten")
+    # # Plot A-posteriori Wahrscheinlichkeiten
+    # axs[1].imshow(output.T, origin="lower")
+    # axs[1].set_xlabel("Frames")
+    # axs[1].set_ylabel("HMM states")
+    # axs[1].set_title("A-post. Wahrscheinlichkeiten")
 
-    # Create a colorbar for both subplots
-    cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])  # [left, bottom, width, height]
-    cbar = fig.colorbar(im, cax=cbar_ax)
-    cbar.set_label('Intensity')
+    # # Create a colorbar for both subplots
+    # cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])  # [left, bottom, width, height]
+    # cbar = fig.colorbar(im, cax=cbar_ax)
+    # cbar.set_label('Intensity')
 
-    plt.tight_layout()
-    plt.show()
+    # plt.tight_layout()
+    # plt.show()
 
 
 
