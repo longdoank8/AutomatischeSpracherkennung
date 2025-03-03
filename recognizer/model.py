@@ -10,9 +10,9 @@ class DNN_Model(torch.nn.Module):
         self.linear_relu_stack = torch.nn.Sequential(
             torch.nn.Linear(idim, hidden_dim),
             torch.nn.ReLU(),
-            torch.nn.Linear(hidden_dim, 2*hidden_dim),
+            torch.nn.Linear(hidden_dim, hidden_dim),
             torch.nn.ReLU(),
-            torch.nn.Linear(2*hidden_dim, hidden_dim),
+            torch.nn.Linear(hidden_dim, hidden_dim),
             torch.nn.ReLU(),
             torch.nn.Linear(hidden_dim, odim)
         )

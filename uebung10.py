@@ -98,7 +98,7 @@ if __name__ == "__main__":
     # in Übung7 trainiertes DNN Model name
     model_name = args.model
     # Model Pfad
-    model_dir = os.path.join(savedir, 'model', model_name + '.pkl')
+    # model_dir = os.path.join(savedir, 'model', model_name + '.pkl')
     # Laden des DNNs
     feat_params = [parameters["window_size"], parameters["hop_size"],
                 parameters["feature_type"], parameters["n_filters"],

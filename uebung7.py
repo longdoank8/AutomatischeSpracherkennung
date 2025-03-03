@@ -70,7 +70,7 @@ if __name__ == '__main__':
         "device": device,
         "lr": 0.001,
         "batch_size": 1,
-        "epochs": 50, 
+        "epochs": 3, 
         "window_size": 25e-3,
         "hop_size": 10e-3,
         "feature_type": 'MFCC_D_DD',

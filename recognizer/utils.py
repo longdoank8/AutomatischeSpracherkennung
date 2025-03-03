@@ -124,5 +124,5 @@ class Dataloader(Dataset):  # For instantiating train, validation and test datas
         label = torch.FloatTensor(tools.praat_file_to_target(label_file_path, sampling_rate=sampling_rate, window_size_samples = window_size_samples, hop_size_samples = hop_size_samples, hmm = self.hmm))
         words = [word.lower() for word in open(word_file_path).read().split()]
 
-        return audiofeat, label, filename
-        #return audiofeat, label, filename, words    ################################### fuer spaeter aendern !!!!!!!
+        #return audiofeat, label, filename
+        return audiofeat, label, filename, words    ################################### fuer spaeter aendern !!!!!!!
