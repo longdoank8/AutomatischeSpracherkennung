@@ -1,8 +1,8 @@
-# Grundlagen Der Automatischen Spracherzeugung: 2024-ase-gruppe 777
+# Automatische Sprachdetektion
 
 ## Content
-
-Dieses Repository basiert auf dem Kurs [Grundlagen Der Automatischen Spracherzeugung](https://moseskonto.tu-berlin.de/moses/modultransfersystem/bolognamodule/beschreibung/anzeigen.html?number=41121&version=1&sprache=1). Das Ziel ist es, eine Transkription aus einem rohen Audiosignal zu erstellen. 
+Das Ziel dieses Projekts ist es, aus einem rohen Audiosignal mithilfe eines selbst entwickelten und trainierten neuronalen Netzes eine Transkription zu erzeugen.
+Das Ergebnis war ein neuronales Netz, welches eine Genauigkeit von 97% Prozent bezitzt.
 
 <img  src="./setup/pictures/objective.png"> 
 
